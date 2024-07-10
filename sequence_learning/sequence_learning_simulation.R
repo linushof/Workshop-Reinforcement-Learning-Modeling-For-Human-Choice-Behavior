@@ -6,16 +6,16 @@ subject = 1
 rndwlk = read.csv('sequence_learning/rndwlk_depth3_100trials.csv',header=F)
 
 #set parameters
-alpha  = 0.3 #parameters['alpha']
-beta   = 3 #parameters['beta']
-lambda = 0.2 #parameters['lambda']
+alpha  = 0.5 
+beta   = 3
+lambda = 0.3 
 
 #set initial var
-Narms              = 2 #cfg$Narms
-Nstages            = 3 #cfg$Nstages
-Nblocks            = 2 #cfg$Nblocks
-Nstates            = 8 #cfg$Nstates
-Ntrials_perblock   = 100 #cfg$Ntrials_perblock
+Narms              = 2 
+Nstages            = 3 
+Nblocks            = 2 
+Nstates            = 8 
+Ntrials_perblock   = 100 
 expvalues          = rndwlk
 rownames(expvalues)= c('ev1','ev2','ev3','ev4','ev5','ev6','ev7','ev8')
 Qval               = as.matrix(t(rep(0,Narms)))
@@ -24,9 +24,10 @@ df                 = data.frame()
 
 for (block in 1:Nblocks){
   
-  Qval = array(0, dim = c(Narms, Nstates, Nstages))
+  Qval = array(0.5, dim = c(Narms, Nstates, Nstages))
   
   for (trial in 1:Ntrials_perblock){
+    
     
     #simulate agent's actions according to a softmax policy
     state1  = 1
@@ -73,7 +74,7 @@ for (block in 1:Nblocks){
     #update Qvalues
     PE_1 = Qval[choice2, state2, 2] - Qval[choice1, state1, 1]
     PE_2 = Qval[choice3, state3, 3] - Qval[choice2, state2, 2]
-    PE_3 = reward                   - Qval[choice3, state3, 3]
+    PE_3 = reward - Qval[choice3, state3, 3]
     
     Qval[choice1, state1, 1] = Qval[choice1, state1, 1] + 
       alpha*PE_1 +
@@ -85,6 +86,7 @@ for (block in 1:Nblocks){
       alpha*lambda*PE_3
     
     Qval[choice3, state3, 3] = Qval[choice3, state3, 3] + alpha*PE_3
+    
     
   }
 }     
