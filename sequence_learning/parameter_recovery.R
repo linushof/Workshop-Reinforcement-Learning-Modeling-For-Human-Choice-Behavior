@@ -53,7 +53,7 @@ my_posteriorplot<-function(x_data,myxlabel,mycolor,myxlim,myylim,my_vline){
 p1 = my_posteriorplot(x_data = plogis(pars$`population_locations[1]`),
                       myxlim = c(0,1),
                       myylim = c(0,17),
-                      my_vline =0.3, 
+                      my_vline =0.5, 
                       myxlabel = expression(alpha['location']),
                       mycolor = "#6699EE")
 
@@ -72,7 +72,7 @@ p4
 p7 = my_posteriorplot(x_data       = plogis(pars$`population_locations[3]`),
                       myxlim  = c(0,1),
                       myylim =c(0,13),
-                      my_vline= 0.2, 
+                      my_vline= 0.3, 
                       myxlabel  = expression(lambda['location']),
                       mycolor = "purple")
 
@@ -94,12 +94,12 @@ my_xyplot<-function(x,y,myxlab,myylab,mycolor){
   return(p)
   
 }
-pr1=my_xyplot(0.3,apply(fit$draws(variables ='alpha',format='draws_matrix'), 2, mean),'alpha true','alpha recovered','navy')#+geom_smooth(method = "lm", se = FALSE)
+pr1=my_xyplot(0.5,apply(fit$draws(variables ='alpha',format='draws_matrix'), 2, mean),'alpha true','alpha recovered','navy')#+geom_smooth(method = "lm", se = FALSE)
 pr1
 
 pr2=my_xyplot(3,apply(fit$draws(variables ='beta',format='draws_matrix'), 2, mean),'beta true','beta recovered','navy')#+geom_smooth(method = "lm", se = FALSE)
 pr2
 
-pr3=my_xyplot(0.2,apply(fit$draws(variables ='lambda',format='draws_matrix'), 2, mean),'lambda true','lambda recovered','navy')#+geom_smooth(method = "lm", se = FALSE)
+pr3=my_xyplot(0.3,apply(fit$draws(variables ='lambda',format='draws_matrix'), 2, mean),'lambda true','lambda recovered','navy')#+geom_smooth(method = "lm", se = FALSE)
 pr3
 
