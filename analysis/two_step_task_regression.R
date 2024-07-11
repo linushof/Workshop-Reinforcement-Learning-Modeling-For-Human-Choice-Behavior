@@ -29,25 +29,14 @@ model=brm(
   backend = "cmdstanr"
 )
 
-custom_colors <- c("common" = "blue", "rare" = "red")
-custom_labels <- c("common" = "Common", "rare" = "Rare")
-plot(conditional_effects(model), plot = FALSE)[[3]]+theme_bw()+ylab("Stay Probability")+
-  xlab("Previous outcome")+
-  scale_x_discrete(labels = c("Unrewarded", "Rewarded"))+
-  scale_color_manual(values = custom_colors,labels=custom_labels)+labs(color = "Transition Type")+
-  guides(fill = "none", color = guide_legend(title = "Transition Type"))
-save(model,file="data/regression/model_tst.rdata")
+save(model,file="data/regression/model_tst_omega0.5.rdata")
 
-# Extract conditional effects
-ce <- conditional_effects(model)
 
 # If you want to extract a specific effect, you can do it like this:
 ce_specific <- conditional_effects(model, effects = "reward_oneback:previous_transition")
 
 # Extract the data frame from the conditional effects
 ce_data <- ce_specific$`reward_oneback:previous_transition`
-
-library(ggplot2)
 
 ggplot(ce_data, aes(x = reward_oneback, y = estimate__, fill = previous_transition )) +
   geom_bar(stat = "identity", position = position_dodge()) +
