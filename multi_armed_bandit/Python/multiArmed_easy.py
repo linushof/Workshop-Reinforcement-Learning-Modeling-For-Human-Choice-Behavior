@@ -53,7 +53,7 @@ data = {
 
 for block in range(Nblocks):
 
-    Qval = np.repeat(0.5, Narms)
+    Qval = np.repeat(0.5, ____)
 
     for trial in range(Ntrials):
 
@@ -62,8 +62,8 @@ for block in range(Nblocks):
         choice = np.random.choice(Narms, p=p)
 
         #outcome
-        p = [1-expvalues[choice,trial], expvalues[choice,trial]]
-        reward = np.random.choice([0,1], p=p)
+        p = [1-expvalues[____,trial], expvalues[____,trial]]
+        reward = np.random.choice([0,1], p=____)
 
         #save trial's data
       
@@ -71,7 +71,7 @@ for block in range(Nblocks):
         data['block'].append(block + 1)
         data['trial'].append(trial + 1)
         data['choice'].append(choice + 1)
-        data['expval_ch'].append(expvalues[choice,trial])
+        data['expval_ch'].append(____)
         data['reward'].append(reward)
         data['Qval_1'].append(Qval[0])
         data['Qval_2'].append(Qval[1])
@@ -79,7 +79,7 @@ for block in range(Nblocks):
         data['expval_2'].append(expvalues[1,trial])
 
         #updating Qvalues
-        Qval[choice] = Qval[choice] + alpha*(reward - Qval[choice])
+        Qval[choice] = Qval[choice] + ____*(reward - Qval[choice])
 
 #create data frame for all data and save
 df = pd.DataFrame(data).reset_index().drop(columns=['index'])
