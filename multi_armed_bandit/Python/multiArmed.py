@@ -83,4 +83,4 @@ for block in range(Nblocks):
 
 #create data frame for all data and save
 df = pd.DataFrame(data).reset_index().drop(columns=['index'])
-df.to_csv('multi_armed_bandit/Python/data/multiArmedSimulationData.csv',index=False)
+df.to_csv(f'./models/multi_armed_bandit/Python/data/multiArmedSimulationData.csv',index=False)
