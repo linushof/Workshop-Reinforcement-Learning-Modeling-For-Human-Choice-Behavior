@@ -30,8 +30,7 @@ def generate_random_walk(Narms=2, Ntrials=100, step_size=0.01):
 
 
 #set parameters
-alpha = 0.3
-beta  = 3
+
   
 #set initial var
 Narms              = 2
@@ -53,17 +52,17 @@ data = {
 
 for block in range(Nblocks):
 
-    Qval = np.repeat(0.5, ____)
+    Qval = _________
 
     for trial in range(Ntrials):
 
         #players choice
-        p = ____(____ * Qval) / ____(____(____ * Qval))
-        choice = np.random.choice(____, p=p)
+        p = _________
+        choice = _________
 
         #outcome
-        p = [____, ____]
-        reward = np.random.choice([0,1], p=____)
+        p = _________
+        reward = _________
 
         #save trial's data
       
@@ -79,7 +78,7 @@ for block in range(Nblocks):
         data['expval_2'].append(expvalues[1,trial])
 
         #updating Qvalues
-        Qval[choice] = ____ + ____*(____ - ____)
+        Qval[choice] = _________
 
 #create data frame for all data and save
 df = pd.DataFrame(data).reset_index().drop(columns=['index'])
