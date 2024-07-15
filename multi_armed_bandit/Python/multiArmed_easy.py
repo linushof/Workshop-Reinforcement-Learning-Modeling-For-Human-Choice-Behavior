@@ -58,8 +58,8 @@ for block in range(Nblocks):
     for trial in range(Ntrials):
 
         #players choice
-        p = np.exp(beta * Qval) / np.sum(np.exp(beta * Qval))
-        choice = np.random.choice(Narms, p=p)
+        p = np.exp(____ * Qval) / np.sum(np.exp(____ * Qval))
+        choice = np.random.choice(____, p=p)
 
         #outcome
         p = [1-expvalues[____,trial], expvalues[____,trial]]
@@ -79,7 +79,7 @@ for block in range(Nblocks):
         data['expval_2'].append(expvalues[1,trial])
 
         #updating Qvalues
-        Qval[choice] = Qval[choice] + ____*(reward - Qval[choice])
+        Qval[choice] = ____ + ____*(reward - ____)
 
 #create data frame for all data and save
 df = pd.DataFrame(data).reset_index().drop(columns=['index'])
