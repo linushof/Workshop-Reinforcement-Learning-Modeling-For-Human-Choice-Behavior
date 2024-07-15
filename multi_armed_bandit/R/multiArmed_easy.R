@@ -37,8 +37,8 @@ for (block in 1:Nblocks){
   for (trial in 1:Ntrials){
     
     #players choice
-    p         = exp(beta*Qval) / sum(exp(beta*Qval))
-    choice    = sample(1:Narms,1,prob=p)
+    p         = exp(____*Qval) / sum(exp(____*Qval))
+    choice    = sample(1:____,1,prob=p)
     
     #outcome 
     reward = sample(0:1,1,prob=c(1-expvalues[____,trial],expvalues[____,trial]))
@@ -60,7 +60,7 @@ for (block in 1:Nblocks){
     #bind to the overall df
     df=rbind(df,dfnew)
     #updating Qvalues
-    Qval[choice] = Qval[choice] + ____*(reward - Qval[choice])
+    Qval[choice] = ____ + ____*(reward - ____)
   }
 }
 

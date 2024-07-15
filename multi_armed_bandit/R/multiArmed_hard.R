@@ -18,8 +18,7 @@ generate_random_walk <- function(Narms = 4, Ntrials = 100, step_size = 0.01) {
 }
 
 #set parameters
-alpha = 0.3
-beta  = 1.5
+
 
 #set initial var
 Narms              = 2
@@ -27,21 +26,21 @@ Nblocks            = 4
 Ntrials            = 100
 expvalues          = generate_random_walk(Narms, Ntrials)
 Qval               = as.matrix(t(rep(0.5,____)))
-colnames(Qval)     =sapply(1:Narms, function(n) {paste('Qbandit',n,sep="")})
-df                 =data.frame()
+colnames(Qval)     = sapply(1:Narms, function(n) {paste('Qbandit',n,sep="")})
+df                 = data.frame()
 
 for (block in 1:Nblocks){
   
-  Qval      = as.matrix(t(rep(0.5,Narms)))
+  Qval      = _________
   
   for (trial in 1:Ntrials){
     
     #players choice
-    p         = ____(____*Qval) / ____(____(____*Qval))
-    choice    = sample(1:____,1,prob=p)
+    p         = _________
+    choice    = _________
     
     #outcome 
-    reward = sample(0:1,1,prob=c(____-____[____,trial],____[____,trial]))
+    reward = _________
     
     #save trial's data
     
@@ -60,7 +59,7 @@ for (block in 1:Nblocks){
     #bind to the overall df
     df=rbind(df,dfnew)
     #updating Qvalues
-    Qval[choice] = ____ + ____*(____ - ____)
+    Qval[choice] = __________________________
   }
 }
 
