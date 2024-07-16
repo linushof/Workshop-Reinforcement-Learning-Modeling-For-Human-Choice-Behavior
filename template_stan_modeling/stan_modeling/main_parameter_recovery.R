@@ -4,25 +4,24 @@ source('./functions/my_starter.R')
 
 path = set_workingmodel()
 
-rndwlk=randomwalk(Narms=4,Ntrials=100,save_text=F,save_csv=F) #for two_step_task
 
 #cfg for MAB
 #cfg for sequence
 
 #cfg for two_step_task
 cfg = list(
-  Nsubjects        = 100,
+  Nsubjects        = 20,
   Nblocks          = 4,
-  Ntrials          = 100,
-  Nstates          = 2,
+  Ntrials          = 50,
+  Nstates          = 2, 
   Narms            = 2, #number of arms in the task
-  Nraffle          = 2, #number of arms offered for selection each trial
-  rndwlk           = rndwlk
+  Nraffle          = 2 #number of arms offered for selection each trial
 )
-
+rndwlk=randomwalk(Narms=cfg$Narms,Ntrials=cfg$Ntrials,save_text=F,save_csv=F) #for two_step_task
+cfg$rndwlk=rndwlk
 
 #####Simulate data--------------------
-generate_artificial_data(cfg = cfg)
+generate_artificial_data(cfg = cfg) #update the variables saved for the stan matrix inside this function.
 load(paste0(path$data,'/artificial_data.Rdata'))
 #####sample posterior--------------------
 
@@ -55,7 +54,7 @@ examine_individual_parameters_recovery(path,ncolumns=2)
 
 ####examine model
 #load parameters
-fit   = readRDS(paste0(path$data, '/modelfit_recovery_full.rds'))
+fit   = readRDS(paste0(path$data, '/modelfit_recovery.rds'))
 fit   = readRDS(paste0(path$data, '/modelfit_empirical.rds'))
 Qdiff = fit$draws(variables = 'Qdiff_external', format = 'draws_matrix')
 Qval1 = fit$draws(variables = 'Qval1_external', format = 'draws_matrix')
