@@ -15,7 +15,8 @@ simulate_convert_to_standata <-function (path,cfg,var_toinclude){
                                  var_toinclude        = var_toinclude,
                                  additional_arguments = list(
                                    Narms  = cfg$Narms, 
-                                   Nstates= cfg$Nstates))
+                                   Nstates= cfg$Nstates,
+                                   Nstages= cfg$Nstages))
 
   #convert to json for python
   json_data <- toJSON(data_for_stan, pretty = TRUE)

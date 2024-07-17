@@ -10,15 +10,4 @@ generate_artificial_data <- function(cfg) {
   # generate trial-by-trial data
   simulate_artifical_data(path,cfg)
   
-  # convert to format that stan likes
-  simulate_convert_to_standata(path,cfg,
-                               
-                               var_toinclude  = c(
-                                 'first_trial_in_block',
-                                 'trial',
-                                 'choice',
-                                 'reward',
-                                 'fold')
-  )
-  
 }
