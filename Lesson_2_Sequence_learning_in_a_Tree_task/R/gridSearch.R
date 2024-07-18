@@ -2,9 +2,9 @@ rm(list=ls())
 
 #pre-allocation
 subject = 1
-rndwlk = read.csv('sequence_learning/R/data/rndwlk_depth3_100trials.csv',header=F)
+rndwlk = read.csv('Lesson_2_Sequence_learning_in_a_Tree_task/R/data/rndwlk_depth3_100trials.csv',header=F)
 
-load('sequence_learning/R/data/sequenceLearning_simulatedData.Rdata')
+load('Lesson_2_Sequence_learning_in_a_Tree_task/R/data/sequenceLearning_simulatedData.Rdata')
 
 Narms              = 2 
 Nstages            = 3 

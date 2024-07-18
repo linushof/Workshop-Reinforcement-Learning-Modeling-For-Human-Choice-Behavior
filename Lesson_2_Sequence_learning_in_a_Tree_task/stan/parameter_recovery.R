@@ -5,21 +5,21 @@ library(cmdstanr)
 
 set_cmdstan_path(path = NULL)
 
-my_compiledmodel <- cmdstan_model('sequence_learning/stan/alpha_lambda_beta_model.stan')
-save(my_compiledmodel,file = 'sequence_learning/stan/alpha_lambda_beta_modelfit_compile.rdata')
+my_compiledmodel <- cmdstan_model('Lesson_2_Sequence_learning_in_a_Tree_task/stan/alpha_lambda_beta_model.stan')
+save(my_compiledmodel,file = 'Lesson_2_Sequence_learning_in_a_Tree_task/stan/alpha_lambda_beta_modelfit_compile.rdata')
 
 
 #--------------------------------------------------------------------------------------------------------
 
 #aim: Hierarchical fit Stan 
 #load model
-load('sequence_learning/stan/alpha_lambda_beta_modelfit_compile.rdata')
+load('Lesson_2_Sequence_learning_in_a_Tree_task/stan/alpha_lambda_beta_modelfit_compile.rdata')
 
 # load data
 #R
-load('sequence_learning/R/data/sequenceLearning_data_stan_format.Rdata')
+load('Lesson_2_Sequence_learning_in_a_Tree_task/R/data/sequenceLearning_data_stan_format.Rdata')
 #Python
-load('sequence_learning/Python/data/sequenceLearning_data_stan_format.Rdata')
+load('Lesson_2_Sequence_learning_in_a_Tree_task/Python/data/sequenceLearning_data_stan_format.Rdata')
 
 #sample
 fit<- my_compiledmodel$sample(
@@ -32,16 +32,16 @@ fit<- my_compiledmodel$sample(
 
 #save
 #R
-fit$save_object('sequence_learning/R/data/sequenceLearning_modelfit_data.rds')
+fit$save_object('Lesson_2_Sequence_learning_in_a_Tree_task/R/data/sequenceLearning_modelfit_data.rds')
 #Python
-fit$save_object('sequence_learning/Python/data/sequenceLearning_modelfit_data.rds')
+#fit$save_object('Lesson_2_Sequence_learning_in_a_Tree_task/Python/data/sequenceLearning_modelfit_data.rds')
 
 library(posterior)
 pars <- as_draws_df(fit$draws())
 #R
-save(pars, file = 'sequence_learning/R/data/sequenceLearning_modelfit_data.Rdata')
+save(pars, file = 'Lesson_2_Sequence_learning_in_a_Tree_task/R/data/sequenceLearning_modelfit_data.Rdata')
 #Python
-save(pars, file = 'sequence_learning/Python/data/sequenceLearning_modelfit_data.Rdata')
+#save(pars, file = 'Lesson_2_Sequence_learning_in_a_Tree_task/Python/data/sequenceLearning_modelfit_data.Rdata')
 
 #--------------------------------------------------------------------------------------------------------
 #This code plot recovered parameters against the true parameters

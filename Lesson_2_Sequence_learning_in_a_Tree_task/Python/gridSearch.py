@@ -8,10 +8,10 @@ import matplotlib.pyplot as plt
 
 # Pre-allocation
 subject = 1
-rndwlk = pd.read_csv('sequence_learning/Python/data/rndwlk_depth3_100trials.csv', header=None)
+rndwlk = pd.read_csv('Lesson_2_Sequence_learning_in_a_Tree_task/Python/data/rndwlk_depth3_100trials.csv', header=None)
 
 # Load the simulated data (assuming the file is a CSV or similar)
-df = pd.read_pickle('sequence_learning/Python/data/sequenceLearning_simulatedData.pkl')
+df = pd.read_pickle('Lesson_2_Sequence_learning_in_a_Tree_task/Python/data/sequenceLearning_simulatedData.pkl')
 
 Narms = 2
 Nstages = 3

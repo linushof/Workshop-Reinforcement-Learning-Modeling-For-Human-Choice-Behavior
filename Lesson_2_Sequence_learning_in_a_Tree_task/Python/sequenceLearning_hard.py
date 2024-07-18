@@ -3,7 +3,7 @@ import pandas as pd
 import pickle
 
 # Load data
-rndwlk = pd.read_csv('sequence_learning/Python/data/rndwlk_depth3_100trials.csv', header=None)
+rndwlk = pd.read_csv('Lesson_2_Sequence_learning_in_a_Tree_task/Python/data/rndwlk_depth3_100trials.csv', header=None)
 
 # Set parameters
 alpha = 0.3
@@ -72,7 +72,7 @@ for block in range(1, Nblocks + 1):
         Qval[choice3 - 1, state3 - 1, 2] += ______
 
 # Save data
-df.to_pickle("sequence_learning/Python/data/sequenceLearning_simulatedData.pkl")
+df.to_pickle("Lesson_2_Sequence_learning_in_a_Tree_task/Python/data/sequenceLearning_simulatedData.pkl")
 
 #### Save in Stan format ####
 def make_mystandata(data, subject_column, block_column, var_toinclude, var_tobenamed=None, additional_arguments=None):
@@ -122,5 +122,5 @@ data_for_stan = make_mystandata(
 )
 
 # Save data for Stan
-with open("sequence_learning/Python/data/sequenceLearning_data_stan_format.pkl", "wb") as f:
+with open("Lesson_2_Sequence_learning_in_a_Tree_task/Python/data/sequenceLearning_data_stan_format.pkl", "wb") as f:
     pickle.dump(data_for_stan, f)

@@ -3,7 +3,7 @@ rm(list=ls())
 
 #pre-allocation
 subject = 1
-rndwlk = read.csv('sequence_learning/R/data/rndwlk_depth3_100trials.csv',header=F)
+rndwlk = read.csv('Lesson_2_Sequence_learning_in_a_Tree_task/R/data/rndwlk_depth3_100trials.csv',header=F)
 
 #set parameters
 alpha  = 0.5 
@@ -85,7 +85,7 @@ for (block in 1:Nblocks){
     
   }
 }     
-save(df, file="sequence_learning/R/data/sequenceLearning_simulatedData.Rdata")
+save(df, file="Lesson_2_Sequence_learning_in_a_Tree_task/R/data/sequenceLearning_simulatedData.Rdata")
 
 #### Save in Stan format ####
 make_mystandata<-function(data, subject_column,block_column,var_toinclude,var_tobenamed,additional_arguments){
@@ -153,6 +153,6 @@ data_for_stan<-make_mystandata(data=df,
                                additional_arguments=list(Nstages=3,Nstates=4))
 
 #save
-save(data_for_stan, file="sequence_learning/R/data/sequenceLearning_data_stan_format.Rdata")
+save(data_for_stan, file="Lesson_2_Sequence_learning_in_a_Tree_task/R/data/sequenceLearning_data_stan_format.Rdata")
 
 
