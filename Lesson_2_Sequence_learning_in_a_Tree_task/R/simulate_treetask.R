@@ -2,8 +2,7 @@
 rm(list=ls())
 
 #pre-allocation
-subject = 1
-rndwlk = read.csv('Lesson_2_Sequence_learning_in_a_Tree_task/R/data/rndwlk_depth3_100trials.csv',header=F)
+rndwlk = read.csv('./data/rndwlk_depth3_100trials.csv',header=F)
 
 #set parameters
 alpha  = 0.5 
@@ -51,7 +50,6 @@ for (block in 1:Nblocks){
     
     #create data for current trials
     dfnew=data.frame(
-      subject              = subject,
       block                = block,
       trial                = trial,
       first_trial_in_block = (trial==1)*1,
@@ -75,7 +73,6 @@ for (block in 1:Nblocks){
     PE_1 = Qval[choice2, state2, 2] - Qval[choice1, state1, 1]
     PE_2 = Qval[choice3, state3, 3] - Qval[choice2, state2, 2]
     PE_3 = reward - Qval[choice3, state3, 3]
-    
     Qval[choice1, state1, 1] = Qval[choice1, state1, 1] + 
       alpha*PE_1 +
       alpha*lambda*PE_2 +
@@ -91,73 +88,4 @@ for (block in 1:Nblocks){
   }
 }     
 save(df, file="Lesson_2_Sequence_learning_in_a_Tree_task/R/data/sequenceLearning_simulatedData.Rdata")
-
-#### Save in Stan format ####
-make_mystandata<-function(data, subject_column,block_column,var_toinclude,var_tobenamed,additional_arguments){
-  
-  
-  #create subjects list (only unique values)
-  subjects_list      =unique(subject_column)
-  blocks_list        =unique(block_column)
-  
-  #create an Ntrials_per_subject vector showing the number of trials for each subject
-  Ntrials_per_subject           =sapply(1:length(subjects_list), function(i) {sum(subject_column==subjects_list[i])})
-  
-  Ntrials_per_subject_per_block =sapply(1:length(blocks_list), function(j) {
-    sapply(1:length(subjects_list), function(i) {sum(subject_column==subjects_list[i] & block_column==j)})})
-  
-  #find the largest number of available data per subject
-  max_trials_per_subject=max(Ntrials_per_subject)
-  
-  #loop over the variables that needs to be included
-  mydata<-lapply(var_toinclude,function(myvar) { 
-    
-    #for each variable, loop over all subjects to create a padded matrix
-    t(sapply(subjects_list,function(subject) 
-      
-    { #create vector for a specific variable and subject
-      current_var=data[subject_column==subject,myvar]
-      # data padding with Inf according to the max number of trials across subjects
-      c(current_var,rep(9999,max_trials_per_subject-sum(subject_column==subject)))})) 
-    
-  }
-  )
-  #add variables names
-  if (missing(var_tobenamed)==T) {names(mydata)=var_toinclude}
-  if (missing(var_tobenamed)==F) {names(mydata)=var_tobenamed}
-  
-  #add additional variables
-  
-  mydata=append(list(Nsubjects                    =length(subjects_list), 
-                     Nblocks                      =length(blocks_list),
-                     Ntrials                      =max_trials_per_subject,  
-                     Ntrials_per_subject          =Ntrials_per_subject,
-                     Ntrials_per_subject_per_block=Ntrials_per_subject_per_block),
-                #fold=t(matrix(block_column,nrow=Ntrials_per_subject,ncol=length(subjects_list)))),
-                mydata)
-  
-  if (missing(additional_arguments)==F) {mydata=append(mydata,additional_arguments)}
-  
-  return(mydata)
-}
-
-data_for_stan<-make_mystandata(data=df, 
-                               subject_column     =df$subject,
-                               block_column       =df$block,
-                               var_toinclude      =c(
-                                 'first_trial_in_block',
-                                 'trial',
-                                 'state1',
-                                 'state2',
-                                 'state3',
-                                 'choice1',
-                                 'choice2',
-                                 'choice3',
-                                 'choice1_oneback',
-                                 'reward'),
-                               additional_arguments=list(Nstages=3,Nstates=4))
-
-#save
-save(data_for_stan, file="Lesson_2_Sequence_learning_in_a_Tree_task/R/data/sequenceLearning_data_stan_format.Rdata")
-
 
