@@ -1,4 +1,4 @@
-simulate_data <- function(Narms, Ntrials, expvalues, alpha, beta){
+simulate_data_broken <- function(Narms, Ntrials, expvalues, alpha, beta){
 
   df                 = data.frame()
   
@@ -9,8 +9,8 @@ simulate_data <- function(Narms, Ntrials, expvalues, alpha, beta){
     for (trial in 1:Ntrials){
       
       #players choice
-      p         = ____________
-      choice    = ____________
+      p         = exp(beta*Qvalues)/ sum ( exp(beta*Qvalues) )
+      choice    = sample( 1:Narms , 1 , prob = p)
       
       #outcome 
       reward = sample(0:1, 1 , prob = c( 1 - expvalues[choice,trial], expvalues[choice,trial]))
@@ -28,7 +28,7 @@ simulate_data <- function(Narms, Ntrials, expvalues, alpha, beta){
       
       
       #updating Qvalues
-      Qvalues[choice] = _______________________
+      Qvalues[choice] = Qvalues[choice] + alpha * (reward-Qvalues[choice])
   
   }
 
