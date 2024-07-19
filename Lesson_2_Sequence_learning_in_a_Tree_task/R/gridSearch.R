@@ -2,9 +2,9 @@ rm(list=ls())
 
 #pre-allocation
 subject = 1
-rndwlk = read.csv('Lesson_2_Sequence_learning_in_a_Tree_task/R/data/rndwlk_depth3_100trials.csv',header=F)
+rndwlk = read.csv('./data/rndwlk_depth3_100trials.csv',header=F)
 
-load('Lesson_2_Sequence_learning_in_a_Tree_task/R/data/sequenceLearning_simulatedData.Rdata')
+load('./data/sequenceLearning_simulatedData.Rdata')
 
 Narms              = 2 
 Nstages            = 3 
@@ -87,5 +87,5 @@ for (l in lambda) {
 
 log_likelihood = log_likelihood_1 + log_likelihood_2 + log_likelihood_3
 which(log_likelihood == max(log_likelihood), arr.ind = TRUE)
-plot(log_likelihood)
+plot(lambda , log_likelihood)
 

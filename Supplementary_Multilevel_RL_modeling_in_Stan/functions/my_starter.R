@@ -15,7 +15,6 @@ library(ggpubr)
 library(ramify)
 library(patchwork)
 library(brms)
-library(jsonlite)
 
 source('./stan_modeling/functions/simulate_parameters.R')
 source('./stan_modeling/functions/simulate_create_artifical_data.R')
@@ -38,7 +37,7 @@ source('./functions/add_standata_file.r')
 source('./functions/set_standata_file.R')
 source('./functions/update_standata_files.R')
 source('./functions/randomwalk.R')
-update_standata_files()
+#update_standata_files()
 
 
 

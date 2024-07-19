@@ -1,21 +1,21 @@
 #### simulate Rescorla-Wagner block for participant ----
 sim.block = function(subject,parameters,cfg){ 
+  
   print(paste('subject',subject))
   
-#pre-allocation
-  
+
   #set parameters
-  alpha = parameters['alpha']
+  alpha  = parameters['alpha']
   lambda = parameters['lambda']
-  beta  = parameters['beta']
+  beta   = parameters['beta']
   omega  = parameters['omega']
 
   
   #set initial var
-  Nstates            = cfg$Nstates #2 states in second stage
-  Narms              = cfg$Narms #2 offered options in each state
+  Nstates            = 2 #number of second-stage states
+  Narms              = 2 #number of arms offered in each state
   Nblocks            = cfg$Nblocks 
-  Ntrials   = cfg$Ntrials
+  Ntrials            = cfg$Ntrials
   expvalues          = t(cfg$rndwlk)
   state_transition   = matrix(c(0.7,0.3,0.3,0.7),ncol=2)
   df                 = data.frame()
@@ -48,12 +48,12 @@ for (block in 1:Nblocks){
     choice2   = sample(1:Narms,1,prob=p2)
     unchosen2 = c(1:Narms)[-choice2]
     
+    
     #sample outcome
     if(state==1){
       expval_ch = expvalues[choice2,trial]
       expval_unch = expvalues[unchosen2,trial]
-    }
-    else{
+    }else{
       expval_ch = expvalues[choice2+2,trial] #for state B, it is 3rd and 4th row of expvalues csv 
       expval_unch = expvalues[unchosen2+2,trial]
     

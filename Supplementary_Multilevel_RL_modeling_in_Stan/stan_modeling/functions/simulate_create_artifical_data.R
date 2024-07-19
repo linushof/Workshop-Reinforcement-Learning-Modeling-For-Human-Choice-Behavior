@@ -29,7 +29,6 @@ simulate_artifical_data <-function(path,cfg){
   #               parameters=model_parameters$artificial_individual_parameters[subject,],
   #               cfg=cfg)
   #   }
-  
   for (subject in 1:Nsubjects) {
     df=rbind(df, sim.block(subject=subject, parameters=model_parameters$artificial_individual_parameters[subject,],cfg=cfg))
   }

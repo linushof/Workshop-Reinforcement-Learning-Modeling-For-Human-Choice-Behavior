@@ -4,19 +4,20 @@ data {
   int<lower = 1> Nsubjects;                                         
   int<lower = 1> Nblocks;           
   int<lower = 1> Ntrials;                                           
-  int<lower = 1> Ntrials_per_subject[Nsubjects];                    
+  array[Nsubjects] int<lower=1> Ntrials_per_subject;
+  
                                        
 
 
   //Behavioral data:
-  int<lower = 0> choice1[Nsubjects,Ntrials];           
-  int<lower = 0> choice2[Nsubjects,Ntrials];           
-  int<lower = 0> choice3[Nsubjects,Ntrials];           
-  int<lower = 0> state1[Nsubjects,Ntrials];           
-  int<lower = 0> state2[Nsubjects,Ntrials];           
-  int<lower = 0> state3[Nsubjects,Ntrials];           
-  int<lower = 0> reward[Nsubjects,Ntrials];           	  //reward outcome coded 0 or 1
-  int<lower = 0> first_trial_in_block[Nsubjects,Ntrials]; //coding whether a trial is the first in a block to allow for Qval rest
+  array[Nsubjects, Ntrials] int<lower=0> choice1;
+  array[Nsubjects, Ntrials] int<lower=0> choice2;
+  array[Nsubjects, Ntrials] int<lower=0> choice3;
+  array[Nsubjects, Ntrials] int<lower=0> state1;
+  array[Nsubjects, Ntrials] int<lower=0> state2;
+  array[Nsubjects, Ntrials] int<lower=0> state3;
+  array[Nsubjects, Ntrials] int<lower=0> reward;
+  array[Nsubjects, Ntrials] int<lower=0> first_trial_in_block;
 
 }
 
@@ -74,7 +75,7 @@ model {
     real PE1;
     real PE2;
     real PE3;
-	  real Qval[2,4,3]; //number of arms x number of states x number of stages (for a tree of three stages the last stage will have 4 states)
+	  array[2,4,3] real Qval; //number of arms x number of states x number of stages (for a tree of three stages the last stage will have 4 states)
     vector [2]Qnet;
 
     

@@ -1,21 +1,20 @@
 #### simulate Rescorla-Wagner block for participant ----
 sim.block = function(subject,parameters,cfg){ 
-  print(paste('subject',subject))
-  
-  #pre-allocation
-  
+
+    print(paste('subject',subject))
+
   #set parameters
   alpha  = parameters['alpha']
   beta   = parameters['beta']
   lambda = parameters['lambda']
   
   #set initial var
-  Narms              = cfg$Narms
-  Nstages            = cfg$Nstages
+  Narms              = 2
+  Nstages            = 3
   Nblocks            = cfg$Nblocks
-  Nstates            = cfg$Nstates
-  Ntrials_perblock   = cfg$Ntrials_perblock
-  expvalues          = cfg$rndwlk
+  Nstates            = 4 #max number of states in each stage
+  Ntrials            = cfg$Ntrials
+  expvalues          = t(cfg$rndwlk)
   rownames(expvalues)= c('ev1','ev2','ev3','ev4','ev5','ev6','ev7','ev8')
   Qval               = as.matrix(t(rep(0,Narms)))
   colnames(Qval)     =sapply(1:Narms, function(n) {paste('Qbandit',n,sep="")})
@@ -25,7 +24,7 @@ sim.block = function(subject,parameters,cfg){
     
     Qval = array(0, dim = c(Narms, Nstates, Nstages))
     
-    for (trial in 1:Ntrials_perblock){
+    for (trial in 1:Ntrials){
       
       #simulate agent's actions according to a softmax policy
       state1  = 1

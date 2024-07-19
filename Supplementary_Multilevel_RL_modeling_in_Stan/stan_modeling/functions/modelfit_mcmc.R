@@ -1,12 +1,12 @@
 
-modelfit_mcmc <-function(path, data_path, mymcmc){
+modelfit_mcmc <-function(path, mymcmc){
   
 
-  #load model
+  # load model
   load(paste0(path$data,'/modelfit_compile.rdata'))
 
   # load data
-  load(data_path)
+  load(paste0(path$data,'/artificial_standata.Rdata'))
 
   #sample
   fit<- my_compiledmodel$sample(

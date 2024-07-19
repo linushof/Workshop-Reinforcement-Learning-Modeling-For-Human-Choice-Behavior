@@ -1,12 +1,12 @@
 simulate_convert_to_standata <-function (path,cfg,var_toinclude){
 
   source('./functions/make_mystandata.R')
-
-
+  
+  
   #load artificial data
   load(paste0(path$data,'/artificial_data.Rdata'))
-
-
+  
+  
   #convert
   df$fold=df$block
   data_for_stan<-make_mystandata(data                 = df, 
@@ -14,18 +14,11 @@ simulate_convert_to_standata <-function (path,cfg,var_toinclude){
                                  block_column         = df$block,
                                  var_toinclude        = var_toinclude,
                                  additional_arguments = list(
-                                   Narms  = cfg$Narms, 
-                                   Nstates= cfg$Nstates,
-                                   Nstages= cfg$Nstages))
-
-  #convert to json for python
-  json_data <- toJSON(data_for_stan, pretty = TRUE)
-  write(json_data, file = paste0('data/stan_ready_data_files/artificial_standata_', path$name, '.json'))
-  #save
-  save(data_for_stan,file=paste0('data/stan_ready_data_files/artificial_standata_', path$name, '.Rdata'))
-  cat(paste0('[stan_modeling]:  "artificial_standata_',path$name,'.Rdata" was saved at stan_ready_data_files. \n Old model data file was overWritten.'))
+                                 Narms  = 2, 
+                                 Nraffle= 2))
   
-  # add_standata_file(paste0('artificial_standata_', path$name, '.Rdata'))
-  # cat(paste0('[stan_modeling]: Added "artificial_standata.Rdata" to model list'))
+  #save
+  save(data_for_stan , file = paste0(path$data, '/artificial_standata.Rdata'))
+  cat(paste0('[stan_modeling]: Added "artificial_standata.Rdata" to model list'))
   
 }

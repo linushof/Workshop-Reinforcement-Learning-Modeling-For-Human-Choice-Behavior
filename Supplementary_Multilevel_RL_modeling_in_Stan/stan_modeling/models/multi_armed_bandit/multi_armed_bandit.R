@@ -10,8 +10,8 @@ sim.block = function(subject,parameters,cfg){
 
   
   #set initial var
-  Narms              = cfg$Narms
-  Nraffle            = cfg$Nraffle
+  Narms              = 2 #cfg$Narms
+  Nraffle            = 2 #cfg$Nraffle
   Nblocks            = cfg$Nblocks
   Ntrials            = cfg$Ntrials
   expvalues          = cfg$rndwlk

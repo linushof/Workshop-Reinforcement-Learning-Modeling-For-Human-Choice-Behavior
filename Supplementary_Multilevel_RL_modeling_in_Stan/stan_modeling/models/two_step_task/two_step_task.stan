@@ -12,7 +12,6 @@ data {
   
   int<lower=2> Narms;
   
-  int<lower=2> Nstates;
   
   
   //Behavioral data:
@@ -30,7 +29,7 @@ data {
 
 
 transformed data {
-
+  int Nstates = 2;
   int Nparameters_standard = 1;
   int Nparameters_transformed = 3;
   real eps=1e-8;
